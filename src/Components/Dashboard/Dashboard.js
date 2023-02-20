@@ -6,8 +6,25 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const Dashboard = () => {
     const [clicked, setClicked] = useState(false);
-    const posts = [3, 3]
-
+    const [value, setValue] = useState('');
+    const [enabled, setEnabled] = useState(false)
+    const [posts, setPosts] = useState([]);
+    const handleInputChange = (event) => {
+        setValue(event.target.value);
+        value.length > 4 && setEnabled(true)
+      }
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        setPosts([...posts, value]);
+        setEnabled(false)
+        setValue(''); // reset the input field after submitting
+      };
+      const removePost = (index) => {
+        const newPosts = [...posts];
+        newPosts.splice(index, 1);
+        setPosts(newPosts);
+      }
+      
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-light">
@@ -84,12 +101,33 @@ const Dashboard = () => {
         >
           <i className="fas fa-plus"></i>
         </button>
-        {clicked == true ? <input /> : null}
+        {clicked == true ? (
+          <div>
+            <form onSubmit={handleSubmit}>
+              <input type="text" value={value} onChange={handleInputChange} />
+              <button type="submit" disabled={!enabled}>Submit</button>
+            </form>
+          </div>
+        ) : null}
       </div>
       Your posts
-      {posts.length > 1 ? (
-        <p>posts</p>
-      ): null}
+      {posts.length > 0 && (
+  <div>
+    {posts.map((value, index) => (
+  <div key={index} className="card" style={{ width: "18rem" }}>
+    <div className="card-body">
+      <button onClick={() => removePost(index)}>
+        <i className="fa-sharp fa-solid fa-x"></i>    
+      </button>
+      <h5 className="card-title">Card title</h5>
+      <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+      <p className="card-text">{value}</p>
+    </div>
+  </div>
+))}
+  </div>
+)}
+
     </div>
   );
 }
