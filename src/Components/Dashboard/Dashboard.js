@@ -111,8 +111,9 @@ const Dashboard = () => {
         ) : null}
       </div>
       Your posts
-      {posts.length > 0 && (
+      {posts.length > 0 ? (
   <div>
+    <p>You have {posts.length} posts</p>
     {posts.map((value, index) => (
   <div key={index} className="card" style={{ width: "18rem" }}>
     <div className="card-body">
@@ -126,7 +127,7 @@ const Dashboard = () => {
   </div>
 ))}
   </div>
-)}
+): <p>You have no posts</p>}
 
     </div>
   );
