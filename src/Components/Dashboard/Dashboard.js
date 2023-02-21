@@ -3,13 +3,11 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import Nav from '../Navbar/Nav';
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
 
-import BlogPage from '../BlogPage/BlogPage';
-
-const Dashboard = () => {
+const Dashboard = (props) => {
+  const {posts, setPosts} = props;
   const [clicked, setClicked] = useState(false);
   const navigate = useNavigate();
 
-  const [posts, setPosts] = useState([]);
 
 
 

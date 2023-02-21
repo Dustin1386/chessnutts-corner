@@ -4,15 +4,17 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BlogPage from './Components/BlogPage/BlogPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useState } from 'react';
 
 
 function App() {
+  const [posts, setPosts] = useState([]);
+
   return (
     <BrowserRouter>
     <Routes>
-    <Route path="/" element={<Dashboard/>}></Route>
-
-    <Route path="/BlogPage" element={<BlogPage/>}></Route>
+    <Route path="/" element={<Dashboard posts={posts} />}></Route>
+    <Route path="/BlogPage" element={<BlogPage setPosts={setPosts}/>}></Route>
 
 
     </Routes>

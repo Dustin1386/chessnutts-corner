@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 
-const BlogPage = () => {
-
+const BlogPage = (props) => {
+  const [posts, setPosts] = props;
   const [value, setValue] = useState('');
   const [enabled, setEnabled] = useState(false);
   const [clicked, setClicked] = useState(false);
-  const [posts, setPosts] = useState([]);
 
 
   const handleInputChange = (event) => {
