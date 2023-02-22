@@ -22,6 +22,7 @@ const Dashboard = (props) => {
   const handleNavClick = () => {
     navigate('/BlogPage');
   };
+  console.log(posts)
 
   return (
       <div>

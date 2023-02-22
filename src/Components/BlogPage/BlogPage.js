@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 
 const BlogPage = (props) => {
-  const [posts, setPosts] = props;
+//   const posts = ['mary', 'tim', 'drake'];
+  const {posts, setPosts } = props;
   const [value, setValue] = useState('');
   const [enabled, setEnabled] = useState(false);
   const [clicked, setClicked] = useState(false);
 
-
+console.log({...posts})
   const handleInputChange = (event) => {
     setValue(event.target.value);
     value.length > 4 && setEnabled(true);
@@ -24,7 +25,7 @@ const BlogPage = (props) => {
           <button onClick={() => setClicked(true)} type="button" className="btn btn-primary">
             <i className="fas fa-plus"></i>
           </button>
-          {clicked === true || posts.length > 0 ? (
+          {clicked === true || posts?.length > 0 ? (
             <div>
               <form onSubmit={handleSubmit}>
                 <textarea type="text" value={value} onChange={handleInputChange} />

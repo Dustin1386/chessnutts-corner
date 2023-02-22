@@ -8,13 +8,13 @@ import { useState } from 'react';
 
 
 function App() {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(['one']);
 
   return (
     <BrowserRouter>
     <Routes>
     <Route path="/" element={<Dashboard posts={posts} />}></Route>
-    <Route path="/BlogPage" element={<BlogPage setPosts={setPosts}/>}></Route>
+    <Route path="/BlogPage" element={<BlogPage posts={posts} setPosts={setPosts}/>}></Route>
 
 
     </Routes>
