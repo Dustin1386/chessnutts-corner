@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 
 function App() {
-  const [posts, setPosts] = useState(['one']);
+  const [posts, setPosts] = useState([]);
 
   return (
     <BrowserRouter>
@@ -16,7 +16,7 @@ function App() {
     <Route path="/" element={<Dashboard posts={posts} />}></Route>
     <Route path="/BlogPage" element={<BlogPage posts={posts} setPosts={setPosts}/>}></Route>
 
-
+  
     </Routes>
         
 

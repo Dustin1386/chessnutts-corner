@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Nav from '../Navbar/Nav';
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
 
 const Dashboard = (props) => {
-  const {posts, setPosts} = props;
+  const [posts, setPosts] = useState([]);
   const [clicked, setClicked] = useState(false);
   const navigate = useNavigate();
 
-
-
-
- 
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch('http://localhost:3000/data');
+      const data = await response.json();
+      setPosts(data);
+    }
+    fetchData();
+  }, []);
 
   const removePost = (index) => {
     const newPosts = [...posts];
@@ -22,7 +26,6 @@ const Dashboard = (props) => {
   const handleNavClick = () => {
     navigate('/BlogPage');
   };
-  console.log(posts)
 
   return (
       <div>
@@ -39,7 +42,7 @@ const Dashboard = (props) => {
                   </button>
                   <h5 className="card-title">Card title</h5>
                   <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                  <p className="card-text">{value}</p>
+                  <p className="card-text">{value?.name}</p>
                 </div>
               </div>
             ))}

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 
 const BlogPage = (props) => {
 //   const posts = ['mary', 'tim', 'drake'];
@@ -6,18 +7,28 @@ const BlogPage = (props) => {
   const [value, setValue] = useState('');
   const [enabled, setEnabled] = useState(false);
   const [clicked, setClicked] = useState(false);
+  const [newPost, setNewPost] = useState("");
 
-console.log({...posts})
+
   const handleInputChange = (event) => {
     setValue(event.target.value);
     value.length > 4 && setEnabled(true);
   };
+
+ 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setPosts([...posts, value]);
+    const post = { title: newPost };
+    axios.post("../../mockdata/db.json", post).then((response) => {
+        setPosts([...posts, response.data]);
+        setNewPost("")
+    })
     setEnabled(false);
     setValue(''); // reset the input field after submitting
+    
   };
+
+  console.log(posts)
   return (
     <div>
           <div>
