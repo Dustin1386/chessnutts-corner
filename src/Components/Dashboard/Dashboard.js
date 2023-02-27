@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Nav from '../Navbar/Nav';
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import BlogPage from '../BlogPage/BlogPage';
 
 const Dashboard = (props) => {
   const [posts, setPosts] = useState([]);
@@ -13,6 +14,7 @@ const Dashboard = (props) => {
       const response = await fetch('http://localhost:3000/data');
       const data = await response.json();
       setPosts(data);
+      console.log(posts)
     }
     fetchData();
   }, []);
@@ -30,6 +32,7 @@ const Dashboard = (props) => {
   return (
       <div>
         <Nav />
+        <BlogPage />
         Your posts
         {posts.length > 0 ? (
           <div>
