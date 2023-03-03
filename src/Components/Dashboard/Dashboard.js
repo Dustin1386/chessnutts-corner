@@ -3,6 +3,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import Nav from '../Navbar/Nav';
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import BlogPage from '../BlogPage/BlogPage';
+import axios from 'axios';
 
 const Dashboard = (props) => {
   const [posts, setPosts] = useState([]);
@@ -19,11 +20,6 @@ const Dashboard = (props) => {
     fetchData();
   }, []);
 
-  const removePost = (index) => {
-    const newPosts = [...posts];
-    newPosts.splice(index, 1);
-    setPosts(newPosts);
-  };
 
   const handleNavClick = () => {
     navigate('/BlogPage');
