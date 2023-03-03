@@ -4,12 +4,10 @@ import { v4 as uuid } from 'uuid';
 
 
 const BlogPage = () => {
-  const [posts, setPosts ] = useState([{name: ''}])
+  const [posts, setPosts ] = useState([{name: ''}]);
   const [value, setValue] = useState('');
   const [enabled, setEnabled] = useState(false);
   const unique_id = uuid();
-
-
   
   const handleInputChange = (event) => {
     setValue(event.target.value);
@@ -17,15 +15,18 @@ const BlogPage = () => {
   };
   
   const handleSubmit = (event) => {
-    event.preventDefault();
     if (enabled) {
-      setPosts(posts => [...posts, {_id: unique_id, name: value}]); 
+      const updatedPosts = [...posts, {_id: unique_id, name: value}];
+      setPosts(updatedPosts);
+      console.log(value);
       setValue('');
       setEnabled(false);
-      axios.post('http://localhost:3000/data', posts[posts.length - 1])
-      .then(response => console.log());
+      axios.post('http://localhost:3000/data', updatedPosts[updatedPosts.length - 1])
+        .then(response => console.log(response))
+        .catch(error => console.error(error));
     }
   };
+  
   
   return (
 <div>
