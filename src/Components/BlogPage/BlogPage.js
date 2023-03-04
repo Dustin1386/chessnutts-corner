@@ -13,25 +13,11 @@ const BlogPage = () => {
     setValue(event.target.value);
     event.target.value.length > 4 ? setEnabled(true) : setEnabled(false);
   };
-  const removePost = (index) => {
-    const newPosts = [...posts];
-    newPosts.splice(index, 1);
-    setPosts(newPosts);
-    axios.delete(`https://localhost:3000/data${posts}`)
-    .then(response => {
-      console.log('Post deleted successfully!');
-    })
-    .catch(error => {
-      console.error('Error deleting post:', error);
-    });
-
-  };
+  
   const handleSubmit = (event) => {
-    event.preventDefault()
     if (enabled) {
       const updatedPosts = [...posts, {_id: unique_id, name: value}];
-      setPosts(updatedPosts);
-      console.log(updatedPosts);
+      setPosts([...updatedPosts].reverse());
       setValue('');
       setEnabled(false);
       axios.post('http://localhost:3000/data', updatedPosts[updatedPosts.length - 1])
